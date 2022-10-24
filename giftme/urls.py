@@ -2,13 +2,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from django.conf.urls.static import static
-from giftme_app.views import ListView, UpdateView, DestroyView, GiftmeLikeView, WishListView, addToWishList
+from giftme_app.views import ListView, UpdateView, DestroyView, GiftmeLikeView
 from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("wishlist/", WishListView.as_view(), name='wishlist'),
-    path("add-to-wishlist", addToWishList, name='add-to-wishlist'),
     path('Главная/',ListView.as_view()),
     path('Просмотр продукта/<int:pk>', UpdateView.as_view()),
     path('<int:product_pk>/like', GiftmeLikeView.as_view()),

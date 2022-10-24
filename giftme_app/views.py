@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Giftme, GiftmeLike, Wishlist
+from .models import Giftme, GiftmeLike
 from .serializers import GiftmeSerializers
 
 
@@ -50,12 +50,6 @@ class GiftmeLikeView(APIView):
             GiftmeLike.objects.create(product_id=product_pk, user=request.user)
             return Response({'success': 'liked'})
 
-class WishListView(generic.View):
-    def get(self, *args, **kwargs):
-        wish_items = Wishlist.objects.filter(user=self.request.user)
-        context = {
-            'wish_items': wish_items
-        }
-        return render(self.request, 'wishlist/wishlist.html', context=context)
+
 
 
