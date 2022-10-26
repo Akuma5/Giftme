@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Giftme, GiftmeImage, Category
 from django.contrib.admin import TabularInline, ModelAdmin
 from django.utils.safestring import mark_safe
+
+from .models import Giftme, GiftmeImage, Category, Friendship
 
 
 class ImageAdminInline(TabularInline):
@@ -28,3 +29,4 @@ class GiftmeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Category)
+admin.site.register(Friendship)

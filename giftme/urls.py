@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from django.conf.urls.static import static
-from giftme_app.views import ListView, UpdateView, DestroyView, GiftmeLikeView
+from giftme_app.views import ListView, UpdateView, DestroyView, GiftmeLikeView, AddToFriend, FriendsList
 from django.conf import settings
 
 urlpatterns = [
@@ -18,6 +18,9 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('drf-auth/', include('rest_framework.urls')),
+
+    path('add_friend/<int:user_id>/', AddToFriend.as_view()),
+    path('my_friends/', FriendsList.as_view())
 ]
 
 if settings.DEBUG:

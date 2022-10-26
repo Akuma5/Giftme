@@ -38,4 +38,13 @@ class GiftmeImage(models.Model):
                                    related_name='photo')
 
 
+class Friendship(models.Model):
+    user_1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_1')
+    user_2 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_2')
+    date_created = models.DateTimeField(auto_now_add=True)
 
+    def get_friends_username(self):
+        return self.user_2.username
+
+    class Meta:
+        unique_together = ['user_1', 'user_2']
