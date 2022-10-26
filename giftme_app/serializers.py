@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Giftme, GiftmeImage, Friendship
+from .models import Giftme, GiftmeImage, Friendship, Wish
 
 
 class GiftmeSerializers(serializers.ModelSerializer):
@@ -21,3 +21,11 @@ class FriendshipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Friendship
         exclude = ['user_1', ]
+
+
+class WishSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Wish
+        fields = '__all__'
+        read_only_fields = ['user',]

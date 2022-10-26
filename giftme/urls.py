@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from django.conf.urls.static import static
-from giftme_app.views import ListView, UpdateView, DestroyView, GiftmeLikeView, AddToFriend, FriendsList
+from giftme_app.views import ListView, UpdateView, DestroyView, GiftmeLikeView, AddToFriend, FriendsList, WishList
 from django.conf import settings
 
 urlpatterns = [
@@ -20,7 +20,9 @@ urlpatterns = [
     path('drf-auth/', include('rest_framework.urls')),
 
     path('add_friend/<int:user_id>/', AddToFriend.as_view()),
-    path('my_friends/', FriendsList.as_view())
+    path('my_friends/', FriendsList.as_view()),
+
+    path('wishlist/', WishList.as_view())
 ]
 
 if settings.DEBUG:

@@ -8,9 +8,10 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from .models import Giftme, GiftmeLike, Friendship
-from .serializers import GiftmeSerializers, FriendshipSerializer
+from .models import Giftme, GiftmeLike, Friendship, Wish
+from .serializers import GiftmeSerializers, FriendshipSerializer, WishSerializer
 
 
 class MagazineAPIListPagination(PageNumberPagination):
@@ -55,10 +56,11 @@ class GiftmeLikeView(APIView):
 
 
 class AddToFriend(APIView):
-    authentication_classes = [BasicAuthentication, ]
+    authentication_classes = [BasicAuthentication, JWTAuthentication, ]
+    permission_classes = (IsAuthenticated,)
+
     def post(self, request, user_id, *args, **kwargs):
         current_user = request.user
-        print(request.user)
         another_user = get_object_or_404(User, id=user_id)
         friendship = Friendship(user_1=current_user, user_2=another_user)
         friendship.save()
@@ -72,4 +74,16 @@ class FriendsList(generics.ListAPIView):
     def get_queryset(self):
         queryset = self.queryset.filter(user_1=self.request.user)
         return queryset
+
+class WishList(generics.ListCreateAPIView):
+    queryset = Wish.objects.all()
+    serializer_class = WishSerializer
+
+    def get_queryset(self,):
+        user = self.request.user
+        queryset = self.queryset.filter(user=user)
+        return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 

@@ -48,3 +48,9 @@ class Friendship(models.Model):
 
     class Meta:
         unique_together = ['user_1', 'user_2']
+
+class Wish(models.Model):
+    gift = models.ForeignKey(Giftme, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_private = models.BooleanField(default=False)
+
