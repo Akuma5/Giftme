@@ -7,7 +7,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Главная/',ListView.as_view()),
+    path('Главная/', ListView.as_view()),
     path('Просмотр продукта/<int:pk>', UpdateView.as_view()),
     path('<int:product_pk>/like', GiftmeLikeView.as_view()),
     path('Удалить продукт/', DestroyView.as_view),
