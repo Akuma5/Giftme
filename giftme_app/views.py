@@ -12,14 +12,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .models import Giftme, GiftmeLike, Friendship, Wish
 from .serializers import GiftmeSerializers, FriendshipSerializer, WishSerializer
-from django.urls import path
-from rest_framework_swagger.views import get_swagger_view
 
-schema_view = get_swagger_view(title='Pastebin API')
-
-urlpatterns = [
-    path(r'^$', schema_view)
-]
 
 class MagazineAPIListPagination(PageNumberPagination):
     page_size = 3
