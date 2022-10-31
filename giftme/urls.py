@@ -10,7 +10,7 @@ urlpatterns = [
     path('Главная/', ListView.as_view()),
     path('Просмотр продукта/<int:pk>', UpdateView.as_view()),
     path('<int:product_pk>/like', GiftmeLikeView.as_view()),
-    path('Удалить продукт/', DestroyView.as_view()),
+    path('Удалить продукт/<int:pk>', DestroyView.as_view()),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
     path('auth/', include('djoser.urls.jwt')),
