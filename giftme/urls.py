@@ -4,12 +4,13 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.conf.urls.static import static
 from giftme_app.views import ListView, UpdateView, DestroyView, GiftmeLikeView, AddToFriend, FriendsList, WishList
 from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Главная/', ListView.as_view()),
     path('Просмотр продукта/<int:pk>', UpdateView.as_view()),
     path('<int:product_pk>/like', GiftmeLikeView.as_view()),
-    path('Удалить продукт/', DestroyView.as_view),
+    path('Удалить продукт/', DestroyView.as_view()),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
     path('auth/', include('djoser.urls.jwt')),
